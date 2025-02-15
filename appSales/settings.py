@@ -186,7 +186,8 @@ CORS_ALLOW_HEADERS = [
     'accept',
     'origin',
     'user-agent',
-    'referer'
+    'referer',
+    'headers'
     
 ]
 
