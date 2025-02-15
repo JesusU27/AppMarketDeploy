@@ -1,0 +1,1 @@
+web: gunicorn appSales.wsgi --log-file -
