@@ -161,7 +161,7 @@ CORS_ALLOW_ALL_ORIGINS = False  # Si prefieres permitir solo los orígenes espec
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:8000",
-    "https://front-sales.vercel.app/"
+    "https://front-sales.vercel.app"
 ]
 
 
