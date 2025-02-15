@@ -156,15 +156,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ALL_ORIGINS = True  # Si prefieres permitir solo los orígenes específicos
+CORS_ALLOW_ALL_ORIGINS = False  # Si prefieres permitir solo los orígenes específicos
 
 
-#CORS_ALLOWED_ORIGINS = [
-#    "http://localhost:5173",
-#    "http://localhost:8000",
-#    "https://front-sales.vercel.app",
-#    "http://front-sales.vercel.app"
-#]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:8000",
+    "https://front-sales.vercel.app",
+    "http://front-sales.vercel.app"
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
