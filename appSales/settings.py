@@ -35,7 +35,8 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = [
     'appmarket-23c7.onrender.com',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'front-sales.vercel.app'
 ]
 
 
