@@ -162,10 +162,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:8000",
     "https://front-sales.vercel.app",
-    "http://front-salecs.vercel.app"
+    "http://front-sales.vercel.app"
 ]
 
-CORS_ALLOW_CREDENCIALS = True
+CORS_ALLOW_CREDENTIALS = True
 
 
 CORS_ALLOW_METHODS = [
@@ -174,6 +174,7 @@ CORS_ALLOW_METHODS = [
     'PUT',
     'PATCH',
     'DELETE',
+    'OPTIONS'
 ]
 
 CORS_ALLOW_HEADERS = [
