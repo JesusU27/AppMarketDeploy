@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = [
-    'https://appmarket-23c7.onrender.com',
+    'appmarket-23c7.onrender.com',
     'localhost',
     '127.0.0.1'
 ]
