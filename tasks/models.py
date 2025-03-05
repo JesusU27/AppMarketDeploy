@@ -4,6 +4,22 @@ from django.contrib.auth.models import AbstractUser
 import uuid
 
 
+
+"""
+Entidad Sale:
+
+-descripción: entidad que describe al objeto a vender
+
+@param description: nombre del objeto a vender
+
+@param unitPrice: precio unitario
+
+@para image_url: direccion de imagen en string
+
+
+
+"""
+
 class Sale(models.Model):
 
     id = models.AutoField(primary_key=True)
@@ -13,6 +29,13 @@ class Sale(models.Model):
     def __str__(self):
         return self.description
 
+"""
+@AbstractUser: es el modelo base de Django para usuarios 
+
+de por si "first_name" y "last_name" viene en el modelo base
+pero se agregró para editar las caracteristicas como el tamaño maximo, etc
+
+"""
 class User(AbstractUser):
     
     first_name = models.CharField(max_length=50, default=' ')
@@ -20,6 +43,23 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+"""
+Entidad Receipt
+
+-descripción: entidad encargada de unir los recibos de determinados objetos
+para cada usuario
+
+@param quantity: cantidad
+@param linker: uuid4 encargado de linkear distintos datos en un solo recibo
+@param food: llave foranea de objeto "Sales"
+@param user: llave foranea de objeto "User"
+@created_at: dato guardado en formato de fecha
+
+
+"""
+
 
 
 class Receipt(models.Model):

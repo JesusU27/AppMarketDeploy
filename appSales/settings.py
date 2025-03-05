@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from datetime import timedelta
 
 from dotenv import load_dotenv
 import os
@@ -32,6 +33,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
+
+#hosts del backend
 ALLOWED_HOSTS = [
     'appmarket-23c7.onrender.com',
     'localhost',
@@ -52,21 +55,27 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'tasks',
+    'tasks',#añadir la entidad "tasks"
+    'drf_yasg' #Swagger UI
 ]
+
+
+#configuración para la autenticacion por JWT 
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated', #solo los usuarios autenticados pueden acceder a la API (de lo contrario recibirán un error 403)
     ],
 }
 
 
 
-AUTH_USER_MODEL = 'tasks.User'
+AUTH_USER_MODEL = 'tasks.User' #Modelo para los usuarios (del backend)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,6 +88,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#configuración del archivo principal de rutas del proyecto
 ROOT_URLCONF = 'appSales.urls'
 
 TEMPLATES = [
@@ -103,6 +113,8 @@ WSGI_APPLICATION = 'appSales.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+#Configuración para la conexión hacia la base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -112,6 +124,29 @@ DATABASES = {
         'HOST': os.getenv('MYSQL_HOST'),  
         'PORT': os.getenv('MYSQL_PORT', '3306'),
     }
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  # Aumenta el tiempo de expiración del token de acceso
+    "REFRESH_TOKEN_LIFETIME": timedelta(hours=1),  # Tiempo de expiración del token de refresco
+    "ROTATE_REFRESH_TOKENS": True,  # Permite renovar el token automáticamente con el refresh token
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": os.getenv('SECRET_KEY'),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+#VALIDACION DEL SWAGGER CON JWT
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': "Formato: Bearer <token>"
+        }
+    },
+    'USE_SESSION_AUTH': False,  # Deshabilita autenticación con sesión
 }
 
 
@@ -157,9 +192,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ALL_ORIGINS = False  # Si prefieres permitir solo los orígenes específicos
+CORS_ALLOW_ALL_ORIGINS = False  #permitir solo los orígenes específicos
 
-
+#lista de origenes permitidos (front end)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:8000",
@@ -168,7 +203,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
 
 CORS_ALLOW_METHODS = [
     'GET',
@@ -187,7 +221,7 @@ CORS_ALLOW_HEADERS = [
     'origin',
     'user-agent',
     'referer',
-    'headers'
+    'headers' #viene del front end (error en users/, especificamente en el service)
     
 ]
 
